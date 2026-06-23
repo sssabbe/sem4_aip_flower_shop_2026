@@ -1,28 +1,71 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-navigation-drawer app v-model="drawer">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            ЦВЕТОЧНЫЙ МАГАЗИН
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            Учебный проект
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
+      <v-list dense>
+        <v-list-item
+          v-for="link in links"
+          :key="link.title"
+        >
+          <template v-slot:prepend>
+            <v-icon :icon="link.icon"></v-icon>
+          </template>
+          <v-list-item-title>{{ link.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    
+    <v-app-bar app dark color="primary">
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <v-btn to="/">Home</v-btn>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+          text
+          v-for="link in links"
+          :key="link.title"
+          :to="link.url"
+        >
+          <v-icon
+            start
+            :icon="link.icon"
+          ></v-icon>
+          {{ link.title }}
+        </v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+    
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      drawer: false,
+      links: [
+        {title: "Login", icon: "mdi-lock", url: "/login"},
+        {title: "Registration", icon: "mdi-face", url: "/registration"},
+        {title: "Orders", icon: "mdi-bookmark-multiple-outline", url: "/orders"},
+        {title: "New Flower", icon: "mdi-note-plus-outline", url: "/new"},
+        {title: "My Flowers", icon: "mdi-view-list-outline", url: "/list"}
+      ]
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
