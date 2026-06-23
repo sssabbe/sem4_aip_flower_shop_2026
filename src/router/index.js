@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import FlowerListView from '../views/Flowers/FlowerListView.vue'
 import FlowerView from '../views/Flowers/FlowerView.vue'
@@ -6,6 +7,8 @@ import NewFlowerView from '../views/Flowers/NewFlowerView.vue'
 import LoginView from '../views/Auth/LoginView.vue'
 import RegistrationView from '../views/Auth/RegistrationView.vue'
 import OrdersView from '../views/User/OrdersView.vue'
+
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -46,8 +49,9 @@ const routes = [
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
 

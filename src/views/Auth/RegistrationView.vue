@@ -74,12 +74,20 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log('Submit clicked!')
       if (this.$refs.form.validate()) {
+        console.log('Form is valid!')
         const user = {
           email: this.email,
           password: this.password
         }
-        console.log(user)
+        console.log('User data:', user)
+        this.$store.dispatch('registerUser', user)
+        console.log('After dispatch')
+        this.$router.push('/')
+        console.log('Redirected to home')
+      } else {
+        console.log('Form is invalid!')
       }
     }
   }

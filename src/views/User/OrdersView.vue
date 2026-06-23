@@ -34,7 +34,7 @@ export default {
       orders: [
         {
           id: "123",
-          name: "Анна",
+          name: "Сабина",
           phone: "+7(978)000-00-05",
           flowerId: "1",
           done: true
